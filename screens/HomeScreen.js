@@ -2,68 +2,53 @@ import { Text, View, StyleSheet, ScrollView, TouchableOpacity } from 'react-nati
 import FitnessCards from '../components/FitnessCards';
 import { Ionicons } from '@expo/vector-icons';
 import { useContext, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { FitnessItems } from '../Context';
 
 const HomeScreen = () => {
   const [showIcon, setShowIcon] = useState(false);
-  const { calories, minutes, workout } = useContext(FitnessItems);
-
-  // Dynamic styles for dark and light mode
-  const themeStyles = showIcon
-    ? styles.lightMode
-    : styles.darkMode;
+  const { calories, minutes, workout, } = useContext(FitnessItems);
 
   return (
-    <View style={[styles.container, themeStyles]}>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.scrollViewContent}
-      >
-        {/* Header Section */}
-        <View style={[styles.header, themeStyles]}>
-          <View style={styles.headerRow}>
-            <Text style={[styles.headerText, themeStyles.text]}>
-              Welcome to Self Fitness Center
-            </Text>
+    <ScrollView showsVerticalScrollIndicator={false}
+      style={{ marginTop: 20 }}>
+      <View style={{ backgroundColor: "#000000d7", paddingTop: 40, paddingHorizontal: 20, height: 160, width: "100%" }}>
+        <View style={{flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginBottom: 50}}>
+          <Text style={{ color: "white", fontWeight: "bold", fontSize: 18 }}>SIX PACK IN 30 DAYS</Text>
 
-            {/* Dark Mode Toggle */}
-            <TouchableOpacity onPress={() => setShowIcon(!showIcon)}>
-              {showIcon ? (
-                <Ionicons name="sunny" size={24} color={themeStyles.text.color} />
-              ) : (
-                <Ionicons name="moon" size={24} color={themeStyles.text.color} />
-              )}
-            </TouchableOpacity>
-          </View>
-
-          {/* Cards Row */}
-          <View style={styles.cardsRow}>
-            {/* First Card */}
-            <View style={[styles.shadowCards, themeStyles.card]}>
-              <Text style={[styles.cardText, themeStyles.text]}>{calories.toFixed(2)}</Text>
-              <Text style={themeStyles.text}>KCAL</Text>
-            </View>
-
-            {/* Second Card */}
-            <View style={[styles.shadowCards, themeStyles.card]}>
-              <Text style={[styles.cardText, themeStyles.text]}>{workout}</Text>
-              <Text style={themeStyles.text}>WORKOUTS</Text>
-            </View>
-
-            {/* Third Card */}
-            <View style={[styles.shadowCards, themeStyles.card]}>
-              <Text style={[styles.cardText, themeStyles.text]}>{minutes}</Text>
-              <Text style={themeStyles.text}>MINUTES</Text>
-            </View>
-          </View>
+          {/* Dark Mode  */}
+          <TouchableOpacity onPress={() => setShowIcon(!showIcon)}>
+            {showIcon ? <Ionicons name="sunny" size={24} color="white" /> : <Ionicons name="moon" size={24} color="white" /> }
+          </TouchableOpacity>  
         </View>
 
-        {/* Fitness Cards */}
-        <FitnessCards />
-      </ScrollView>
-    </View>
-  );
-};
+        {/* Cards Row  */}
+        <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", marginBottom: 30 }}>
+
+          {/* First Card  */}
+          <View style={styles.shadowCards}>
+            <Text style={{ fontWeight: "bold", fontSize: 18 }}>{calories.toFixed(2)}</Text>
+            <Text>KCAL</Text>
+          </View>
+
+          {/* Second Card  */}
+          <View style={styles.shadowCards}>
+            <Text style={{ fontWeight: "bold", fontSize: 18 }}>{workout}</Text>
+            <Text>WORKOUTS</Text>
+          </View>
+
+          {/* Third Card  */}
+          <View style={styles.shadowCards}>
+            <Text style={{ fontWeight: "bold", fontSize: 18 }}>{minutes}</Text>
+            <Text>MINUTES</Text>
+          </View>
+        </View>
+      </View>
+      {/* Fitness Cards  */}
+      <FitnessCards />
+    </ScrollView>
+  )
+}
 
 export default HomeScreen;
 
@@ -106,28 +91,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5,
-  },
-  cardText: {
-    fontWeight: 'bold',
-    fontSize: 18,
-  },
-  darkMode: {
-    backgroundColor: '#000000d7',
-    text: {
-      color: 'white',
-    },
-    card: {
-      backgroundColor: '#1a1a1a',
-    },
-  },
-  lightMode: {
-    backgroundColor: '#f5f5f5',
-    text: {
-      color: 'black',
-    },
-    card: {
-      backgroundColor: '#ffffff',
-    },
+    elevation: 5
   },
 });
