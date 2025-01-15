@@ -1,27 +1,59 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HomeScreen from './screens/HomeScreen';
-import WorkoutScreen from './screens/WorkoutScreen';
-import FitScreen from './screens/FitScreen';
-import RestScreen from './screens/RestScreen';
-// import HomeScreen from './screens/HomeScreen';
-import SignupScreen from './screens/SignupScreen';
-import LoginScreen from './screens/LoginScreen';
+import React, { useEffect, useState } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import HomeScreen from "./screens/HomeScreen";
+import LoginScreen from "./screens/LoginScreen";
+import SignupScreen from "./screens/SignupScreen";
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
+  const [isLoggedIn, setIsLoggedIn] = useState(null);
+
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      const loggedIn = await AsyncStorage.getItem("isLoggedIn");
+      setIsLoggedIn(loggedIn === "true");
+    };
+    checkLoginStatus();
+  }, []);
+
+  const handleLogin = async () => {
+    await AsyncStorage.setItem("isLoggedIn", "true");
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = async () => {
+    await AsyncStorage.removeItem("isLoggedIn");
+    setIsLoggedIn(false);
+  };
+
+  if (isLoggedIn === null) {
+    return null;
+  }
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen options={{headerShown: false}} name="Login" component={LoginScreen} />
-        <Stack.Screen options={{headerShown: false}} name="Signup" component={SignupScreen} />
-        <Stack.Screen options={{headerShown: false}} name="Home" component={HomeScreen} />
-        <Stack.Screen options={{headerShown: false}} name="Workout" component={WorkoutScreen} />
-        <Stack.Screen options={{ headerShown: false }} name="Fit" component={FitScreen} />
-        <Stack.Screen options={{ headerShown: false }} name="Rest" component={RestScreen} />
+        {isLoggedIn ? (
+          <Stack.Screen
+            name="Home"
+            options={{ headerShown: false }}
+            children={(props) => <HomeScreen {...props} onLogout={handleLogout} />}
+          />
+        ) : (
+          <>
+            <Stack.Screen
+              name="Login"
+              options={{ headerShown: false }}
+              children={(props) => <LoginScreen {...props} onLogin={handleLogin} />}
+            />
+            <Stack.Screen name="Signup" options={{ headerShown: false }} component={SignupScreen} />
+          </>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
-  )
-}
+  );
+};
 
-export default StackNavigator
+export default StackNavigator;
