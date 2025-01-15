@@ -5,6 +5,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import SignupScreen from "./screens/SignupScreen";
+import WorkoutScreen from "./screens/WorkoutScreen";
+import FitScreen from "./screens/FitScreen"; // Import the Fit screen
 
 const StackNavigator = () => {
   const Stack = createNativeStackNavigator();
@@ -29,6 +31,7 @@ const StackNavigator = () => {
   };
 
   if (isLoggedIn === null) {
+    // Optionally show a loading spinner
     return null;
   }
 
@@ -36,11 +39,23 @@ const StackNavigator = () => {
     <NavigationContainer>
       <Stack.Navigator>
         {isLoggedIn ? (
-          <Stack.Screen
-            name="Home"
-            options={{ headerShown: false }}
-            children={(props) => <HomeScreen {...props} onLogout={handleLogout} />}
-          />
+          <>
+            <Stack.Screen
+              name="Home"
+              options={{ headerShown: false }}
+              children={(props) => <HomeScreen {...props} onLogout={handleLogout} />}
+            />
+            <Stack.Screen
+              name="Workout"
+              options={{ headerTitle: "Workout Details" }}
+              component={WorkoutScreen}
+            />
+            <Stack.Screen
+              name="Fit"
+              options={{ headerTitle: "Start Workout" }}
+              component={FitScreen}
+            />
+          </>
         ) : (
           <>
             <Stack.Screen
@@ -48,7 +63,11 @@ const StackNavigator = () => {
               options={{ headerShown: false }}
               children={(props) => <LoginScreen {...props} onLogin={handleLogin} />}
             />
-            <Stack.Screen name="Signup" options={{ headerShown: false }} component={SignupScreen} />
+            <Stack.Screen
+              name="Signup"
+              options={{ headerShown: false }}
+              component={SignupScreen}
+            />
           </>
         )}
       </Stack.Navigator>
