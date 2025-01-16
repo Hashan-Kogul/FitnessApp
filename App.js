@@ -22,7 +22,7 @@ export default function App() {
 
   // Show a loading screen while checking the login status
   if (isLoggedIn === null) {
-    return null; // Or render a loading spinner/screen here
+    return null;
   }
 
   return (

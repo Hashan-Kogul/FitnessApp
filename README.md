@@ -1,49 +1,58 @@
-<div align="center">
-  
-  ![GitHub repo size](https://img.shields.io/github/repo-size/geeky-prashant/react-native-fitness-app)
-  ![GitHub stars](https://img.shields.io/github/stars/geeky-prashant/react-native-fitness-app?style=social)
-  ![GitHub forks](https://img.shields.io/github/forks/geeky-prashant/react-native-fitness-app?style=social)
- 
-  <br />
+Fitness App
+A React Native application designed to help users track and maintain their fitness journey. The app includes features such as login, signup, workout tracking, rest management, and more.
 
-  <h2 align="center">React Native Fitness App</h2>
+Features
+User Authentication (Login/Signup).
+Workout screens with exercise tracking.
+Rest timer functionality.
+Clean UI with responsive design.
+Context API for state management.
+Easy navigation using React Navigation.
 
-  In this project, I have created a Fitness App, The project is built using Expo, React Native, and React Native Navigation.
 
-</div>
+Project Structure
+Fitness_App/ ├── .expo/ - Expo configuration files
+├── .gitignore - Git ignore rules
+├── App.js - Main entry point of the app
+├── app.json - App configuration
+├── assets/ - Static assets (images, icons)
+├── babel.config.js - Babel configuration file
+├── components/ - Reusable React components
+│ ├── FitnessCards.js
+├── Context.js - Context API implementation
+├── data/ - Static data files
+│ ├── fitness.js
+├── package-lock.json - Lockfile for npm
+├── package.json - Project dependencies
+├── readme-images/ - Images for documentation
+├── README.md - Project documentation
+├── screens/ - Screens for the app
+│ ├── FitScreen.js
+│ ├── HomeScreen.js
+│ ├── LoginScreen.js
+│ ├── RestScreen.js
+│ ├── SignupScreen.js
+│ ├── WorkoutScreen.js
+├── StackNavigator.js - Navigation setup
+├── yarn.lock - Lockfile for yarn
 
-### Demo Screenshot
+Setup Instructions
+1. Navigate to the project directory:
+2. cd Fitness_App
+3. Install dependencies:
+4. npm install or yarn install
+5. Start the development server:
+6. npm start or yarn start
 
-![React Native Fitness App Demo](./readme-images/React-Native-Fitness-App.png "Desktop Demo")
+Dependencies
+React Native
+Expo
+React Navigation
+Context API
 
-## Get Started
 
-install dev dependencies
+Notes
+Ensure Expo CLI is installed globally to run the app efficiently.
 
-### `npm install`
-
-## Then
-
-Run The App
-
-### `npm start`
-
-Runs your app in development mode.
-
-Open it in the [Expo app](https://expo.io) on your phone to view it. It will reload if you save edits to your files, and you will see build errors and logs in the terminal.
-
-#### `npm run ios`
-
-Like `npm start` / `yarn start`, but also attempts to open your app in the iOS Simulator if you're on a Mac and have it installed.
-
-#### `npm run android`
-
-Like `npm start` / `yarn start`, but also attempts to open your app on a connected Android device or emulator. Requires an installation of Android build tools (see [React Native docs](https://facebook.github.io/react-native/docs/getting-started.html) for detailed setup).
-
-### Contact
-
-If you want to contact me you can reach me at [LinkedIn](https://www.linkedin.com/in/geekyprashant/).
-
-### License
-
-This project is **free to use** and does not contain any license.
+License
+This project is licensed under the MIT License. You are free to use, modify, and distribute it.
